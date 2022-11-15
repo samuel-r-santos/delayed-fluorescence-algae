@@ -211,7 +211,7 @@ df_plot %>%
   filter(Time < 39.9) %>% 
   ggplot(aes(x = Time, y = value, color = concentration))+
   theme_bw()+
-  ylim(1e3,1e6)+
+  ylim(1e3,7.5e5)+
   geom_hline(yintercept = 1e3) +
   stat_summary(fun.data = mean_se, geom = "line") +
   stat_smooth(method = "lm", color = "red",
