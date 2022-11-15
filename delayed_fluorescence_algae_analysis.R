@@ -55,7 +55,7 @@ cat(paste('Chemical tested:' , sampleName, '\n',
 
 # Importing all excel files into one data frame
 
-all_excel_files <- path_with_excel_files %>%
+all_excel_files <- setwd(dlg_dir(default = getwd())$res) %>%
   list.files(pattern = ".xls", full.names = TRUE) %>%
   set_names(filenames) %>% 
   map_dfr(read_excel, sheet = 2, .id = "filename") %>% 
@@ -63,7 +63,7 @@ all_excel_files <- path_with_excel_files %>%
   pivot_wider(names_from = filename, values_from = L01S03R01)
 all_excel_files
 
-#Cuting the noise background
+#Cutting the noise background
 
 delayed_lum_data <- filter(all_excel_files, Time > 0.9)
 delayed_lum_data
@@ -192,9 +192,12 @@ df_plot %>%
   group_by(concentration) %>% 
   summarise(total_counts = sum(value)) %>% 
   ggplot(aes(x = concentration, y = total_counts)) +
+  theme_bw() +
   geom_point() +
   geom_smooth(method = lm) +
-  stat_cor(method="pearson", label.x = 25)
+  stat_cor(method="pearson", label.x = 25)+
+  labs(x = "concentration",
+       y = "total counts")
 
 #STATISTICS ANALYSIS -----------------------------------------------------------
 
