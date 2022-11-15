@@ -201,13 +201,13 @@ df_plot %>%
 
 #Polynomial fit -------------------------------------------------------------
 polynomial_DF <- delayed_lum_data %>% 
-  filter(Time > 9.9) %>% 
+  filter(Time > 4.9) %>% 
   filter(Time < 39.9) %>% 
   #inserir aqui uma funcao que retorna os dados estatisticos
 polynomial_DF
   
 df_plot %>%
-  filter(Time > 9.9) %>% 
+  filter(Time > 4.9) %>% 
   filter(Time < 39.9) %>% 
   ggplot(aes(x = Time, y = value, color = concentration))+
   theme_bw()+
