@@ -199,5 +199,27 @@ df_plot %>%
   labs(x = "concentration",
        y = "total counts")
 
+#Polynomial fit -------------------------------------------------------------
+polynomial_DF <- delayed_lum_data %>% 
+  filter(Time > 9.9) %>% 
+  filter(Time < 39.9) %>% 
+  #inserir aqui uma funcao que retorna os dados estatisticos
+polynomial_DF
+  
+df_plot %>%
+  filter(Time > 9.9) %>% 
+  filter(Time < 39.9) %>% 
+  ggplot(aes(x = Time, y = value, color = concentration))+
+  theme_bw()+
+  ylim(1e3,1e6)+
+  geom_hline(yintercept = 1e3) +
+  stat_summary(fun.data = mean_se, geom = "line") +
+  stat_smooth(method = "lm", color = "red",
+              formula = y ~ poly(x, 5))+
+  facet_grid(. ~ concentration)+
+  labs(title = "Polynomial fitting",
+       x = "Time [s]",
+       y = "photon-counts")
+
 #STATISTICS ANALYSIS -----------------------------------------------------------
 
