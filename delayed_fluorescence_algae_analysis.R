@@ -200,10 +200,11 @@ df_plot %>%
        y = "total counts")
 
 #Polynomial fit -------------------------------------------------------------
+#inserir aqui uma funcao que retorna os dados estatisticos
+delayed_lum_data
 polynomial_DF <- delayed_lum_data %>% 
   filter(Time > 4.9) %>% 
   filter(Time < 39.9) %>% 
-  #inserir aqui uma funcao que retorna os dados estatisticos
 polynomial_DF
   
 df_plot %>%
@@ -222,4 +223,5 @@ df_plot %>%
        y = "photon-counts")
 
 #STATISTICS ANALYSIS -----------------------------------------------------------
+
 
