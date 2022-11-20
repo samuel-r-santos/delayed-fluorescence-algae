@@ -9,6 +9,7 @@ if (!require(ggplot2)) install.packages("ggplot2")
 if (!require(ggpubr)) install.packages("ggpubr")
 if (!require(scales)) install.packages("scales")
 if (!require(dplyr)) install.packages("dplyr")
+if (!require(broom)) install.packages("broom")
 if (!require(matrixStats)) install.packages("matrixStats")
 if (!require(purrr)) install.packages("purrr")
 if (!require(stringr)) install.packages("stringr")
@@ -24,6 +25,7 @@ library(ggpubr)
 library(scales)
 library(datasets)
 library(dplyr)
+library(broom)
 library(magrittr)
 library(purrr)
 
@@ -69,7 +71,7 @@ delayed_lum_data <- filter(all_excel_files, Time > 0.9)
 delayed_lum_data
 
 #DELAYED FLUORESCENCE PLOT DEFAULT
-
+#graph[1]
 plot(delayed_lum_data$Time, delayed_lum_data$`0.0(1).xls`,
      type = "l", col="dark green", 
      ylim = c(1e2,1e6), xlab = "Time [s]", ylab = "photon-counts")
@@ -145,6 +147,7 @@ df_plot
 
 sapply(df_plot, class)
 df_plot$concentration <- as.numeric(df_plot$concentration)
+df_plot$replicate <- as.numeric(df_plot$replicate)
 sapply(df_plot, class)
 
 #Plot individual data
@@ -200,12 +203,6 @@ df_plot %>%
        y = "total counts")
 
 #Polynomial fit -------------------------------------------------------------
-#inserir aqui uma funcao que retorna os dados estatisticos
-delayed_lum_data
-polynomial_DF <- delayed_lum_data %>% 
-  filter(Time > 4.9) %>% 
-  filter(Time < 39.9) %>% 
-polynomial_DF
   
 df_plot %>%
   filter(Time > 4.9) %>% 
@@ -213,7 +210,7 @@ df_plot %>%
   ggplot(aes(x = Time, y = value, color = concentration))+
   theme_bw()+
   ylim(1e3,7.5e5)+
-  geom_hline(yintercept = 1e3) +
+  geom_hline(yintercept = 0) +
   stat_summary(fun.data = mean_se, geom = "line") +
   stat_smooth(method = "lm", color = "red",
               formula = y ~ poly(x, 5))+
@@ -222,6 +219,14 @@ df_plot %>%
        x = "Time [s]",
        y = "photon-counts")
 
+#How to extract the polynomial coef of each plot?
+#How to find the instant Time for dy/dx = 0 ?
+
 #STATISTICS ANALYSIS -----------------------------------------------------------
 
+only_delayed_data <- select(delayed_lum_data, - Time)
+only_delayed_data
+summary(only_delayed_data)
+only_delayed_data 
 
+polym(polynomial_DF, degree = 5)
