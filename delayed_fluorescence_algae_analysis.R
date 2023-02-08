@@ -71,6 +71,7 @@ delayed_lum_data <- filter(all_excel_files, Time > 0.9)
 delayed_lum_data
 
 #DELAYED FLUORESCENCE PLOT DEFAULT
+
 #graph[1]
 plot(delayed_lum_data$Time, delayed_lum_data$`0.0(1).xls`,
      type = "l", col="dark green", 
@@ -160,6 +161,7 @@ df_plot%>%
   ylim(1e2,1e6)+
   facet_grid(replicate ~ concentration)+
   labs(title = "Delayed Fluorescence",
+       subtitle = sampleName,
        x = "Time [s]",
        y = "photon-counts")
 
@@ -173,6 +175,7 @@ df_plot %>%
   stat_summary(fun.data = mean_se, geom = "line") +
   facet_grid(. ~ concentration)+
   labs(title = "Mean of Delayed Fluorescence",
+       subtitle = sampleName,
        x = "Time [s]",
        y = "photon-counts")
 
@@ -185,6 +188,7 @@ df_plot %>%
   stat_summary(fun = sum, geom = "bar") +
   facet_grid(. ~ replicate)+
   labs(title = "Total counts of delayed fluorescence",
+       subtitle = sampleName,
        x = "concentration",
        y = "total counts")
 
@@ -199,7 +203,9 @@ df_plot %>%
   geom_point() +
   geom_smooth(method = lm) +
   stat_cor(method="pearson", label.x = 25)+
-  labs(x = "concentration",
+  labs(title = "Concentration vs total counts",
+       subtitle = sampleName,
+       x = "concentration",
        y = "total counts")
 
 #Polynomial fit -------------------------------------------------------------
@@ -229,5 +235,5 @@ only_delayed_data
 summary(only_delayed_data)
 only_delayed_data 
 
-
+str(only_delayed_data)
 
