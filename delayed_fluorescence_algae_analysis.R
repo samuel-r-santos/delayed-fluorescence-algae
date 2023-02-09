@@ -225,11 +225,11 @@ df_plot %>%
        x = "Time [s]",
        y = "photon-counts")
 
+
 #How to extract the polynomial coef of each plot?
 #How to find the instant Time for derivative  dy/dx = 0 ?
 
 #STATISTICS ANALYSIS -----------------------------------------------------------
-
 only_delayed_data <- select(delayed_lum_data, - Time)
 only_delayed_data
 summary(only_delayed_data)
