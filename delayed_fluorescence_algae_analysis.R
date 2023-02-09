@@ -225,7 +225,6 @@ df_plot %>%
        x = "Time [s]",
        y = "photon-counts")
 
-
 #How to extract the polynomial coef of each plot?
 #How to find the instant Time for derivative  dy/dx = 0 ?
 
