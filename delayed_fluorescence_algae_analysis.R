@@ -28,7 +28,7 @@ library(dplyr)
 library(broom)
 library(magrittr)
 library(purrr)
-
+library("stringr")
 #SET WORKING DIRECTORY
 getwd()
 path_with_excel_files <- setwd(dlg_dir(default = getwd())$res)
@@ -210,6 +210,7 @@ df_plot %>%
 
 #Polynomial fit -------------------------------------------------------------
 #Gallep sugeriu senoides amortizadas  
+#Estudar com o Xis um novo modelo
 df_plot %>%
   filter(Time > 4.9) %>% 
   filter(Time < 39.9) %>% 
