@@ -209,7 +209,7 @@ df_plot %>%
        y = "total counts")
 
 #Polynomial fit -------------------------------------------------------------
-  
+#Gallep sugeriu senoides amortizadas  
 df_plot %>%
   filter(Time > 4.9) %>% 
   filter(Time < 39.9) %>% 
